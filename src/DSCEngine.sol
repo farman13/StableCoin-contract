@@ -25,7 +25,7 @@ contract DSCEngine {
     uint256 private constant MIN_HEALTHFACTOR = 1;
     uint256 private constant LIQUIDATION_BONUS = 10;
 
-    mapping(address tokenAddress => address priceFeed) private s_priceFeeds; // accpeted collateral address wit hits pricefeed address(initialized by constructor).
+    mapping(address tokenAddress => address priceFeed) private s_priceFeeds; // accpeted collateral address with its pricefeed address(initialized by constructor).
     mapping(address user => mapping(address token => uint256 amount)) private s_CollateralDeposited; // amount of particular collateral submitted for a user
     mapping(address user => uint256 DSCMinted) private s_DSCMinted; // amount of DSC minted by a particular user.
     address[] private s_collateralTokens; // storing the addresses of collateral currently accepting(constructor).
@@ -178,7 +178,7 @@ contract DSCEngine {
     function getTokenAmountFromUsd(address token, uint256 usdAmtInWei) public view returns (uint256) {
         AggregatorV3Interface priceFeed = AggregatorV3Interface(s_priceFeeds[token]);
         (, int256 price,,,) = priceFeed.latestRoundData();
-        // 1000e18 * 1e18 / 2000e8 * 1e10;
+        // 1000e18 * 1e18 / 2000e8 * 1e10 = 0.5ETH ;
         return (usdAmtInWei * PRECISION) / (uint256(price) * ADDITIONAL_FEED_PRECISION);
     }
 

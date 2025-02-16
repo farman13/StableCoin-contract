@@ -1,3 +1,17 @@
 Some Testing Stuff --
 
 For single testing a function -> forge test --match-test testFunctionName.
+
+
+ uint256 collateralAdjustedForThresold = (collateralValueInUsd * LIQUIDATION_THRESOLD) / LIQUIDATION_PRECISION; //200% 
+ *** This above formula makes collateralValueInUsd to its half.  thats why it ensures that collateral is 200% overCollaterized.       
+   eg. collateralValueInUsd is $1000 ETH  & assume we minted $1000 DSC , now after appyling above formula  
+   collateralAdjustedForThresold comes out to be  =  (1000 * 50) /100  => 500
+   then while returning 500/1000 = 0.5 which is less than 1 that means user is damaging the protocol and we have to liquidate onw.
+   hence this formula ensures that it the collateralValueInUsd must be 200% that means double of dsc value in usd.
+
+   as if ollateralValueInUsd is $2000 ETH  & assume we minted $1000 DSC then ,
+   collateralAdjustedForThresold comes out to be  =  (2000 * 50) /100  => 1000,
+   then while returning 1000/1000 = 1 , healthFactor good .
+     
+   return collateralAdjustedForThresold * PRECISION / totalDSCMinted;   
