@@ -1,66 +1,53 @@
-## Foundry
+# Decentralized Stablecoin (DSC) & DSCEngine
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A fully decentralized, algorithmic, and overcollateralized stablecoin system designed for stability and security. DSC (Decentralized Stablecoin) is pegged to USD and backed by exogenous collateral like ETH & BTC.
 
-Foundry consists of:
+## Features
+- **Collateral:** Exogenous (ETH & BTC)
+- **Minting:** Algorithmic
+- **Relative Stability:** Pegged to USD
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## DSCEngine Responsibilities
+✅ **200% Collateralization** – Users must deposit collateral worth twice the DSC they mint.
+✅ **Chainlink Price Feeds** – Ensures real-time USD valuation of collateral.
+✅ **Liquidation Mechanism** – Under-collateralized positions can be liquidated to maintain stability.
+✅ **Minting & Burning** – Users can mint DSC against collateral and burn DSC to redeem collateral.
+✅ **Health Factor Enforcement** – Maintains collateral safety ratios to prevent excessive risk.
 
-## Documentation
+## Tech Stack
+- **Smart Contract Framework:** Foundry
+- **Oracles:** Chainlink Price Feeds
+- **Blockchain:** Ethereum
 
-https://book.getfoundry.sh/
+## Setup Instructions
 
-## Usage
-
-### Build
-
-```shell
-$ forge build
+### 1. Install Dependencies
+```sh
+forge install
 ```
 
-### Test
-
-```shell
-$ forge test
+### 2. Compile Smart Contracts
+```sh
+forge build
 ```
 
-### Format
-
-```shell
-$ forge fmt
+### 3. Deploy Smart Contracts
+```sh
+forge script script/Deploy.s.sol --rpc-url <YOUR_RPC_URL> --private-key <YOUR_PRIVATE_KEY> --broadcast
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
+### 4. Run Tests
+```sh
+forge test
 ```
 
-### Anvil
+## Environment Variables
+Ensure to set up your `.env` file with the required details before running the project.
 
-```shell
-$ anvil
-```
+## Contributing
+Feel free to open issues or submit pull requests to enhance the project.
 
-### Deploy
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+---
+🚀 **Decentralized Stability at Its Best!** 🔥
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
